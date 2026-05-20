@@ -65,6 +65,7 @@ async def get_remind_before(update: Update, context: ContextTypes.DEFAULT_TYPE):
         remind_before=context.user_data["remind_before"]
     )
     add_task(task)
+    await update.message.reply_text("Вы успешно добавили задачу!")
     return ConversationHandler.END    
 
 async def list_tasks_handler(update: Update, context:ContextTypes.DEFAULT_TYPE):
