@@ -8,6 +8,7 @@ class Task:
     priority: str
     deadline: str
     user_id: int
+    remind_before: int
     
     def to_dict(self):
         return {
@@ -16,7 +17,8 @@ class Task:
             "status": self.status,
             "priority": self.priority,
             "deadline": self.deadline,
-            "user_id": self.user_id
+            "user_id": self.user_id,
+            "remind_before": self.remind_before
                     }
    
     @classmethod
@@ -27,5 +29,6 @@ class Task:
             status=data["status"],
             priority=data["priority"],
             deadline=data["deadline"],
-            user_id=data["user_id"]
+            user_id=data["user_id"],
+            remind_before=data["remind_before"]
             )

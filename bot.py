@@ -1,11 +1,12 @@
-import asyncio
+
 import os
+
 from dotenv import load_dotenv
 from telegram.ext import Application, CommandHandler, MessageHandler, ConversationHandler, filters
 from handlers.handlers import (
-    start_add, get_title, get_priority, get_deadline,
+    get_remind_before, start_add, get_title, get_priority, get_deadline,
     list_tasks_handler, done_task_handler, delete_task_handler, start_bot, help_command,
-    TITLE, PRIORITY, DEADLINE
+    TITLE, PRIORITY, DEADLINE, REMIND_BEFORE
 )
 async def schedule_reminders(context):
     from scheduler.reminder import check_deadlines
@@ -13,14 +14,15 @@ async def schedule_reminders(context):
 
 def main():
     load_dotenv()
-    token = os.getenv("TOKEN")
-    app = Application.builder().token(token).build()
+    TOKEN = os.getenv("TOKEN")
+    app = Application.builder().token(TOKEN).build()
     conv_handler = ConversationHandler(
     entry_points=[CommandHandler("add", start_add)],
     states={
         TITLE: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_title)],
         PRIORITY: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_priority)],
         DEADLINE: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_deadline)],
+        REMIND_BEFORE: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_remind_before)]
     },
     fallbacks=[]
         )
