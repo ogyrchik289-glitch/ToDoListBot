@@ -28,7 +28,7 @@ async def get_priority(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Пожалуйста, введите корректный приоритет (низкий, средний, высокий):")
         return PRIORITY
     context.user_data["priority"] = priority_map[priority]
-    await update.message.reply_text("Введите срок выполенения задачи. Формат: ДД.ММ.ГГГГ ЧЧ:ММ:")
+    await update.message.reply_text("Введите срок выполенения задачи. Формат: ДД.ММ.ГГГГ ЧЧ (например: 25.12.2024 18):")
     return DEADLINE
 
 async def get_deadline(update: Update, context: ContextTypes.DEFAULT_TYPE):
